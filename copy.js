@@ -19,11 +19,11 @@ let deepCopy = obj => {
     
     let copyArray = lst => {
 	switch (true) {
-	  case (lst.length == 0 ): return lst;
+	  case (lst.length == 0 ): return [];
 	  case (typeof lst != 'object'): return lst;
 	}
 	
-	return _unshift(  copyArray(lst.slice(1)), startCopy(lst[0])  );
+	return _unshift(  copyArray( lst.slice(1) ), startCopy( lst[0] )  );
     }
 
     
@@ -48,7 +48,7 @@ let deepCopy = obj => {
 	  case 'object':
 	      return copyObject(obj);
 	  case 'date':
-	      return new Date(obj.getTime());
+	      return new Date( obj.getTime() );
 	
 	  default: return obj;	
 	}    
@@ -57,8 +57,31 @@ let deepCopy = obj => {
     return startCopy(obj);
 }
 
+let superObject = {
+	sd1: 1,
+	sd2: [
+	    1 , 2, 3, 4, 5 , {
+		sd3: 43,
+		sd6: [ 1, 2, 3, 4,
+		       {
+			   sd8: 8
+		       }
+		     ],
+		date: new Date()
+	    }
+	]
+}
 
-let superObj = new Date();
 
-console.log(deepCopy(superObj));
+setTimeout(function () {
+    console.log(new Date());
+    console.log(deepCopy(superObject));
+}, 4000);
+
+
+		
+	       
+		
+    
+		     
 
